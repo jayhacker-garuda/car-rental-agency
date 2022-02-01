@@ -108,29 +108,34 @@ function App() {
                 <div class="container">
                   <div class="card">
                     <div class="imgBx">
-                      <img src="http://pngimg.com/uploads/speedometer/speedometer_PNG50.png" alt="nike-air-shoe" />
+                      <img src="http://pngimg.com/uploads/speedometer/speedometer_PNG48.png" alt="nike-air-shoe" />
                     </div>
 
                     <div class="contentBx">
 
                       <h2>{selectedCar.Name}</h2>
 
-                      <div class="size">
-                        <h3>Size :</h3>
-                        <span>7</span>
-                        <span>8</span>
-                        <span>9</span>
-                        <span>10</span>
+                      <span
+                        style={{ 
+                          color: "white",
+                          backgroundColor: "blue",
+                          padding: "10px",
+                          border: "none",
+                          borderRadius: "10px",
+                          // boxShadow: "-moz-initial",
+                          cursor: "pointer",
+                         }}
+                      >Buy Now</span>
+                      <div className="size">
+                        <h3>Horse-Power :</h3>
+                        <span>{ selectedCar.Horsepower }</span>
                       </div>
 
-                      <div class="color">
+                      <div className="color">
 
-                        <h3>Color :</h3>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                        <h3>Acceleration :</h3>
+                        <span>{selectedCar.Acceleration }</span>
                       </div>
-                      <a href="#">Buy Now</a>
                     </div>
 
                   </div>
