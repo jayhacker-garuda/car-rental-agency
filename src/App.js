@@ -37,23 +37,34 @@ const Header = () => (
   </header>
 );
 
-const CarsRow = ({ Cars }) => (
+const CarsRow = ({ Cars, onSelect }) => (
   <tr>
     <td>{Cars.Name.toUpperCase()}</td>
     <td>{Cars.Year}</td>
     <td>{Cars.Origin}</td>
+    <td>
+      <button
+        onClick={() => onSelect(Cars)}
+      >
+        View
+      </button>
+    </td>
   </tr>
 );
 
 CarsRow.propTypes = {
   Cars: propTypes.shape({
-    Name: propTypes.string
+    Name: propTypes.string,
+    Year: propTypes.string,
+    Origin: propTypes.string
   }),
+  onSelect: propTypes.func,
 }
 
 function App() {
 
   const [search, setSearch] = useState("");
+  const [selectedCar, setSelectedCar] = useState(null);
 
   return (
     <div>
@@ -66,7 +77,11 @@ function App() {
       <div>
         <div className='search-box'>
           <div className='center-serch-box'>
-            <input />
+            <input
+              placeholder='Search Here'
+              value={search}
+              onChange={e => setSearch(e.target.value) }
+            />
           </div>
         </div>
         <div className='display-section'>
@@ -79,11 +94,50 @@ function App() {
               </tr>
             </thead>
             <tbody>
-              {Cars.slice(0, 10).map((Cars) => (
-                <CarsRow key={Cars.ID} Cars={Cars} />
+              {Cars
+                .filter((Cars) => Cars.Name.toLowerCase().includes(search.toLowerCase()) )
+                .slice(0, 10)
+                .map((Cars) => (
+                  <CarsRow key={Cars.ID} Cars={Cars} onSelect={(Cars) => setSelectedCar(Cars)} />
               ))}
               </tbody>
           </table>
+          <div>
+            {selectedCar && (
+              <div>
+                <div class="container">
+                  <div class="card">
+                    <div class="imgBx">
+                      <img src="http://pngimg.com/uploads/speedometer/speedometer_PNG50.png" alt="nike-air-shoe" />
+                    </div>
+
+                    <div class="contentBx">
+
+                      <h2>{selectedCar.Name}</h2>
+
+                      <div class="size">
+                        <h3>Size :</h3>
+                        <span>7</span>
+                        <span>8</span>
+                        <span>9</span>
+                        <span>10</span>
+                      </div>
+
+                      <div class="color">
+
+                        <h3>Color :</h3>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                      <a href="#">Buy Now</a>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
